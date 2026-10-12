@@ -708,6 +708,8 @@ try {
 
     Write-Host ''
     if ($isPublic) {
+        Write-Host "READY (frontend HTTP): http://localhost:3001/" -ForegroundColor Green
+        Write-Host "READY (frontend HTTP on LAN): http://<WINDOWS_LAN_IP>:3001/ (requires LAN firewall access)" -ForegroundColor Yellow
         Write-Host "READY: https://$($settings.PublicIP)/" -ForegroundColor Green
         if ($settings.Domain) { Write-Host "READY: https://$($settings.Domain)/" -ForegroundColor Green }
     } else {

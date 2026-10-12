@@ -430,14 +430,14 @@ export function ReportEditorPage() {
       {loading ? (
         <Spinner />
       ) : sections.length === 0 ? (
-        <ReportEvidenceTocContext.Provider value={{ page: evidencePageStart }}>
-        <ReportCaseExhibitProvider jobId={jobId!}>
         <Card className="p-8 text-center">
           <p className="text-sm text-ink-500">
             No report sections yet. Complete Case intake, then click Generate report. After a draft exists, use Recreate report to wipe it and generate every section from the beginning.
           </p>
         </Card>
       ) : (
+        <ReportEvidenceTocContext.Provider value={{ page: evidencePageStart }}>
+        <ReportCaseExhibitProvider jobId={jobId!}>
         <div className="space-y-3">
           {sectionsWithPages.map(({ section, pageStart }) => (
             <Card key={section.id} className="p-5">
@@ -469,6 +469,12 @@ export function ReportEditorPage() {
                 </div>
               ) : (
                 <p className="mt-4 text-sm italic text-ink-400">No narrative content yet.</p>
+              )}
+              {section.citations && section.citations.length > 0 && (
+                <p className="mt-3 text-xs text-ink-400">{section.citations.length} citation(s)</p>
+              )}
+            </Card>
+          ))}
           {jobId && (
             <Card className="p-5">
               <h3 className="font-bold text-ink-900">Evidences</h3>
@@ -483,12 +489,6 @@ export function ReportEditorPage() {
         </div>
         </ReportCaseExhibitProvider>
         </ReportEvidenceTocContext.Provider>
-              {section.citations && section.citations.length > 0 && (
-                <p className="mt-3 text-xs text-ink-400">{section.citations.length} citation(s)</p>
-              )}
-            </Card>
-          ))}
-        </div>
       )}
     </div>
   );
